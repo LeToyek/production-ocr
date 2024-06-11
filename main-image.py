@@ -20,8 +20,9 @@ if __name__ == '__main__':
     # model = YOLO('yolov5s.pt')  # Using a small YOLOv5 model for example
 
     # image = cv2.imread('testocr.png', cv2.IMREAD_GRAYSCALE)
-    # image = cv2.imread('cap-full-text.jpeg', cv2.IMREAD_GRAYSCALE)
-    image = cv2.imread('cap-full-text-blue.jpeg', cv2.IMREAD_GRAYSCALE)
+    image = cv2.imread('cap-full-text.jpeg', cv2.IMREAD_GRAYSCALE)
+    # image = cv2.imread('cap-full-text-blue.jpeg', cv2.IMREAD_GRAYSCALE)
+    # image = cv2.imread('cap-new.jpeg', cv2.IMREAD_GRAYSCALE)
     # image = cv2.imread('kardus.jpeg', cv2.IMREAD_GRAYSCALE)
 
     # Set kernel (structuring element) size
@@ -38,7 +39,7 @@ if __name__ == '__main__':
     dilate = cv2.dilate(thresh, max_kernel, iterations=8)
     erode = cv2.erode(dilate, kernel_erode, iterations=5)
     closing_image = cv2.morphologyEx(erode, cv2.MORPH_CLOSE, max_kernel, None, None, 1, cv2.BORDER_REFLECT101)
-    custom_config = r'lang="dotslayer.traineddata" --oem 3 --psm 6'
+    custom_config = r'--oem 3 --psm 6'
     text = pytesseract.image_to_string(closing_image, config=custom_config)
     print("Text:", text)
     text_count = len(text)
